@@ -290,14 +290,15 @@ I also think that your first win should be Minotaur or Gargoyle Berserker, becau
 (9:57:57 AM) Patashu: Don't let it drop any lower because then you don't have any 'buffer' left at all, a lucky hit can do 20~ and later in the game 50++ damage
 
 ## Random Shit
-    - shift-x to view map and press e to ignore an area during autotravel. press e twice to ignore a specific square (useful for a door). good to use on elf 3 vault.
+ - shift-x to view map and press e to ignore an area during autotravel. press e twice to ignore a specific square (useful for a door). good to use on elf 3 vault.
 
 
 ### Bot Commands
-command | result
-------- | ------
-??      | query the crawldb
-@??     | get monster stats
+command                     | result
+-------                     | ------
+??                          | query the crawldb
+@??                         | get monster stats
+!hs * vp en god=ash -4 -log | useful for finding successful builds with X god etc
 
 
 ### Links
@@ -312,4 +313,5 @@ command | result
  * [LearnDB Search](https://lookupdb.guy.ht/)
  * http://www.reddit.com/r/dcss/comments/1hetzj/how_to_not_grind_interface_usage_dont_do_work/
  * http://www.reddit.com/r/dcss/comments/2mjo74/frequently_asked_questions_common_misconceptions/
+ * [dump of bang commands](bang_commands_dump.txt)
 
