@@ -153,7 +153,7 @@ allow_self_target        = no
 auto_drop_chunks         = yes
 auto_eat_chunks          = true
 autofight_caught         = true
-# autofight_fire_stop      = 0
+# autofight_fire_stop      = false
 autofight_stop           = 0
 autofight_throw_nomove   = true
 autofight_wait           = true
@@ -815,4 +815,3 @@ mon += boggart:magenta i
 mon += greater mummy:lightmagenta M
 mon += ancient lich:lightmagenta L
 mon += lightning spire:lightcyan {
-
