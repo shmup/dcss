@@ -313,6 +313,7 @@ command                     | result
 
  * [cbro webtiles](http://crawl.berotato.org:8080)
  * [tournaments](http://dobrazupa.org/tournament/0.16)
+ * [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
  * [/r/dcss](http://www.reddit.com/r/dcss)
  * [The Tavern](https://crawl.develz.org/tavern/)
  * [Play DCSS Online](http://crawl.develz.org/wordpress/howto)
