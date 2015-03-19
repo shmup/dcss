@@ -7,6 +7,7 @@ _rng [giveth](http://i.imgur.com/XV18fWm); rng [taketh](http://i.imgur.com/EQgGw
 ## Contents
  - [Useful Commands](#useful-commands)
  - [Useful Config Settings](#useful-config-settings)
+ - [Formulas](#formulas)
  - **Mini Guides**
     * [Where Should I Go Next](#where-should-i-go-next)
     * [Killhole](#killhole)
@@ -51,6 +52,12 @@ default_manual_training=true | essential, IMO, since autoskilling is generally w
 easy_eat_chunks=true         | you won't be prompted whether to eat chunks (unless they are 'bad quality' -- what used to be 'contaminated' and may still be if you are playing an old version of DCSS.)
 explore_delay=-1             | makes autoexplore not update the display until it stops (so it is as fast as possible). travel_delay=-1 | is similar for travelling.
 show_travel_trail=true       | shows the path that was most recently taken by autoexplore. Particularly useful if you are using explore_delay=-1 described above.
+
+### Formulas
+
+thing        | formula
+-----        | --------
+weapon level | (base attack delay - minimum delay) * 20
 
 
 ## Where Should I Go Next?
@@ -291,6 +298,7 @@ I also think that your first win should be Minotaur or Gargoyle Berserker, becau
 
 ## Random Shit
  - shift-x to view map and press e to ignore an area during autotravel. press e twice to ignore a specific square (useful for a door). good to use on elf 3 vault.
+ - (base delay - min delay) * 20 aka (1.3 - .6) * 20 = 14 (what you would level that weapon skill to)
 
 
 ### Bot Commands
@@ -311,6 +319,7 @@ command                     | result
  * [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
  * [Crawl LearnDB](https://loom.shalott.org/learndb.html)
  * [LearnDB Search](https://lookupdb.guy.ht/)
+ * [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
  * http://www.reddit.com/r/dcss/comments/1hetzj/how_to_not_grind_interface_usage_dont_do_work/
  * http://www.reddit.com/r/dcss/comments/2mjo74/frequently_asked_questions_common_misconceptions/
  * [dump of bang commands](bang_commands_dump.txt)
