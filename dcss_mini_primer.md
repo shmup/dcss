@@ -16,8 +16,8 @@ _rng [giveth](http://i.imgur.com/XV18fWm); rng [taketh](http://i.imgur.com/EQgGw
         - [A quick guide to brands](#a-quick-guide-to-brands)
         - [Weapon Types](#weapon-types)
  - [Patashu's Tips](#patashus-tips)
- - [Bot Commands](#bot-commands)
  - [Random Shit](#random-shit)
+ - [Bot Commands](#bot-commands)
  - [Links](#links)
 
 ### Useful Commands
@@ -46,8 +46,8 @@ ff                  | fire at last target
 setting                      | result
 --------                     | --------
 pickup_mode=multi            | a menu of items on ground that you toggle + or - to pickup. much more useful
-autofight_stop               | HP thresholds for refusing to autofight
-hp_warning                   | Low-HP warning
+autofight_stop=60            | HP thresholds for refusing to autofight
+hp_warning=50                | Low-HP warning
 default_manual_training=true | essential, IMO, since autoskilling is generally way worse. It just selects manual skilling mode as the default (so you don't have to .. manually.. switch to it every new character.)
 easy_eat_chunks=true         | you won't be prompted whether to eat chunks (unless they are 'bad quality' -- what used to be 'contaminated' and may still be if you are playing an old version of DCSS.)
 explore_delay=-1             | makes autoexplore not update the display until it stops (so it is as fast as possible). travel_delay=-1 | is similar for travelling.
@@ -296,7 +296,7 @@ I also think that your first win should be Minotaur or Gargoyle Berserker, becau
 
 (9:57:57 AM) Patashu: Don't let it drop any lower because then you don't have any 'buffer' left at all, a lucky hit can do 20~ and later in the game 50++ damage
 
-## Random Shit
+## Random Shit To Organize Later
  - shift-x to view map and press e to ignore an area during autotravel. press e twice to ignore a specific square (useful for a door). good to use on elf 3 vault.
  - (base delay - min delay) * 20 aka (1.3 - .6) * 20 = 14 (what you would level that weapon skill to)
 
@@ -307,21 +307,28 @@ command                     | result
 ??                          | query the crawldb
 @??                         | get monster stats
 !hs * vp en god=ash -4 -log | useful for finding successful builds with X god etc
+!help                       | a list of most of the bot commands
 
 
 ### Links
 
  * [cbro webtiles](http://crawl.berotato.org:8080)
- * [tournaments](http://dobrazupa.org/tournament/0.16)
- * [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
- * [/r/dcss](http://www.reddit.com/r/dcss)
- * [The Tavern](https://crawl.develz.org/tavern/)
  * [Play DCSS Online](http://crawl.develz.org/wordpress/howto)
- * [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
- * [Crawl LearnDB](https://loom.shalott.org/learndb.html)
- * [LearnDB Search](https://lookupdb.guy.ht/)
- * [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
+ * [tournaments](http://dobrazupa.org/tournament/0.16)
+ * [dump of bang commands used in #octolog](bang_commands_dump.txt)
+ * **Resources**
+    - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
+    - [Crawl LearnDB](https://loom.shalott.org/learndb.html)
+    - [LearnDB Search](https://lookupdb.guy.ht/)
+    - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
+    - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
+ * **Communities**
+    - [/r/dcss](http://www.reddit.com/r/dcss)
+    - [The Tavern](https://crawl.develz.org/tavern/)
+ * **Dev**
+    - https://gitorious.org/crawl (also: [Cheibriados' cloned repo](http://s-z.org/neil/git/?p=crawl.git;a=summary))
+    - [Bug Tracker](https://crawl.develz.org/mantis/main_page.php)
+    - [Mailing List](https://lists.sourceforge.net/lists/listinfo/crawl-ref-discuss)
  * http://www.reddit.com/r/dcss/comments/1hetzj/how_to_not_grind_interface_usage_dont_do_work/
  * http://www.reddit.com/r/dcss/comments/2mjo74/frequently_asked_questions_common_misconceptions/
- * [dump of bang commands](bang_commands_dump.txt)
 
