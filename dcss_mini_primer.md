@@ -15,13 +15,11 @@ _rng [giveth](http://i.imgur.com/XV18fWm); rng [taketh](http://i.imgur.com/EQgGw
     * [What weapon should I use?](#what-weapon-should-i-use)
         - [A quick guide to brands](#a-quick-guide-to-brands)
         - [Weapon Types](#weapon-types)
- - [Patashu's Tips](#patashus-tips)
- - [Random Shit](#random-shit)
+    * [Patashu's Tips](#patashus-tips)
  - [Bot Commands](#bot-commands)
  - [Links](#links)
 
 ### Useful Commands
-
 key                 | action
 ----                | ----
 ??                  | a list that details all of the following bindings, and more!
@@ -36,32 +34,28 @@ ctrl-f              | search for drops. i like to 'search armour, search shield,
 ff                  | fire at last target
 '                   | swaps between weapons in inventory slot "a" and "b"
 =                   | can reassign inventory slot item letters. useful for swap weapons
-\ | toggle autopickup status of items you've already recognized
-~ | use macros. great for magic users. imagine your number row as a spell bar. 
-
+\                   | toggle autopickup status of items you've already recognized
+~                   | use macros. great for magic users. imagine your number row as a spell bar.
+shift-x then e      | makes an area excempt from autoexplore. double tap e to select a single tile
 
 
 ### Useful Config Settings
-
 setting                      | result
 --------                     | --------
-pickup_mode=multi            | a menu of items on ground that you toggle + or - to pickup. much more useful
 autofight_stop=60            | HP thresholds for refusing to autofight
-hp_warning=50                | Low-HP warning
 default_manual_training=true | essential, IMO, since autoskilling is generally way worse. It just selects manual skilling mode as the default (so you don't have to .. manually.. switch to it every new character.)
 easy_eat_chunks=true         | you won't be prompted whether to eat chunks (unless they are 'bad quality' -- what used to be 'contaminated' and may still be if you are playing an old version of DCSS.)
 explore_delay=-1             | makes autoexplore not update the display until it stops (so it is as fast as possible). travel_delay=-1 | is similar for travelling.
+hp_warning=50                | Low-HP warning
+pickup_mode=multi            | a menu of items on ground that you toggle + or - to pickup. much more useful
 show_travel_trail=true       | shows the path that was most recently taken by autoexplore. Particularly useful if you are using explore_delay=-1 described above.
 
 ### Formulas
-
-thing        | formula
------        | --------
+             | formula
+------       | --------
 weapon level | (base attack delay - minimum delay) * 20
 
-
 ## Where Should I Go Next?
-
 Here's my branch order, which I think is fairly common. There are times when deviating from this branch order is a good idea, mostly if you encounter something extremely nasty in the branch your trying to clear and can't go around it.
 
 1. Clear dungeon until I find Lair.
@@ -160,7 +154,7 @@ For a faster low-damage weapon vs. a slower high-damage weapon: Faster weapons b
 
 ### A quick guide to brands:
 
-**Vorpal** (Slicing, Crushing, Chopping, etc)*: 16.67% bonus damage on average. Not the best brand, but always solid, since nothing resists it. A good general purpose brand on high-damage weapons, not as great on fast, low-damage ones.
+**Vorpal** (Slicing, Crushing, Chopping, etc): 16.67% bonus damage on average. Not the best brand, but always solid, since nothing resists it. A good general purpose brand on high-damage weapons, not as great on fast, low-damage ones.
 
 **Flaming, Freezing**: 25% bonus damage on average of the corresponding element. Like vorpal, it's good for high-damage weapons, not as good for fast, low-damage ones. Tends to be better than vorpal, since it does more damage to more enemies, even if some can resist it. Freezing also slows cold-blooded enemies. Which one is better can vary by branch.
 
@@ -296,11 +290,6 @@ I also think that your first win should be Minotaur or Gargoyle Berserker, becau
 
 (9:57:57 AM) Patashu: Don't let it drop any lower because then you don't have any 'buffer' left at all, a lucky hit can do 20~ and later in the game 50++ damage
 
-## Random Shit To Organize Later
- - shift-x to view map and press e to ignore an area during autotravel. press e twice to ignore a specific square (useful for a door). good to use on elf 3 vault.
- - (base delay - min delay) * 20 aka (1.3 - .6) * 20 = 14 (what you would level that weapon skill to)
-
-
 ### Bot Commands
 command                     | result
 -------                     | ------
@@ -308,7 +297,6 @@ command                     | result
 @??                         | get monster stats
 !hs * vp en god=ash -4 -log | useful for finding successful builds with X god etc
 !help                       | a list of most of the bot commands
-
 
 ### Links
 
