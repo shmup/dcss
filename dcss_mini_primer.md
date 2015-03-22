@@ -305,9 +305,9 @@ command                     | result
  * [tournaments](http://dobrazupa.org/tournament/0.16)
  * [dump of bang commands used in #octolog](bang_commands_dump.txt)
  * **Resources**
+    - [Search LearnDB](https://lookupdb.guy.ht/)
+    - [LearnDB](https://loom.shalott.org/learndb.html)
     - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
-    - [Crawl LearnDB](https://loom.shalott.org/learndb.html)
-    - [LearnDB Search](https://lookupdb.guy.ht/)
     - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
  * **Communities**
