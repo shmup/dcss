@@ -16,7 +16,6 @@ autofight_stop              = 60
 autofight_stop              = 70
 autofight_throw_nomove      = true
 autofight_wait              = true
-autopickup                  = $?!:/%\
 chunks_autopickup           = true
 confirm_butcher             = never
 default_manual_training     = true
@@ -50,6 +49,51 @@ stat_colour                 = 7
 travel_delay                = -1
 use_animations             -= player, hp, branch_entry
 view_delay                  = 300
+
+#!!! Autopickup
+pickup_mode = multi
+autopickup  = $?!:"/%\
+ae := autopickup_exceptions
+ae += (useless|evil)_item
+ae += dangerous_item.*scrolls? of (holy word|noise|torment)
+ae += potions? of (flight|lignification|mutation)
+ae += wand of (confusion|enslavement|fireball|flame|frost|lightning)
+ae += wand of (magic darts|paralysis|polymorph|random effects|slowing)
+ae += <throwing net
+ae += <(fan of gales|lamp of fire|phial of floods|stone of tremors)
+ae += <phantom mirror
+ae += <unidentified.*(jewellery|book|magical staff|rod)
+ae += <legendary deck
+ae += (beef jerky|pizza)
+
+: if you.god ~= "Fedhas" then
+    ae += fruit
+: end
+
+: if you.race() ~= "Vampire" then
+    ae += potions? of.*blood
+: end
+
+: if you.god() == "Nemelex Xobeh" then
+    ae += <deck
+: end
+
+: local branch = you.branch()
+: if branch == "Pan" or branch:find("Zig") then
+    autopickup = $
+    ae =
+    ae += (useless|evil)_item
+    ae += <wand of (heal wounds|hasting|teleportation)
+    ae += dangerous_item.*scrolls? of (holy word|torment)
+    ae += <scrolls? of (acquirement|identify|recharging|remove curse)
+    ae += <scrolls? of (amnesia|brand weapon|enchant|magic mapping)
+    ae += <scrolls? of (fog|holy word|torment)
+    ae += <scrolls? of (blinking|teleportation)
+    ae += <potions? of (beneficial mutation|cure mutation|experience)
+    ae += <potions? of (curing|heal wounds|magic|restore abilities)
+    ae += <(meat|bread) ration
+    ae += <legendary deck
+: end
 
 #!!! Inscriptions 
 ai := autoinscribe
@@ -354,6 +398,74 @@ bindkey = [\] CMD_TARGET_OBJ_CYCLE_FORWARD
 bindkey = [/] CMD_SEARCH_STASHES
 bindkey = [^I] CMD_TARGET_CYCLE_FORWARD
 bindkey = [S] CMD_SAVE_GAME_NOW
+
+#!! Glyphs
+show_player_species = true
+
+# Features
+# cset_unicode = item_gold:xa3
+cset_unicode = item_gold:x24
+cset_unicode = cloud:#
+feature = explore horizon {.,,green}
+feature = (closed|runed|sealed) door {+,,}
+
+mon := mon_glyph
+
+# Uniques
+mon += Louise:blue
+
+# Insects
+mon += giant cockroach:brown B
+mon += boring beetle:yellow B
+mon += giant mite:lightred B
+mon += demonic crawler:green B
+mon += worker ant:red B
+mon += queen ant:lightgreen B
+mon += soldier ant:white B
+
+# Flying insects
+mon += queen bee:lightgreen y
+mon += vampire mosquito:lightgrey y
+
+# Canines
+mon += hog:lightred
+mon += hell hog:lightmagenta
+
+# Beasts
+mon += ice beast:ice Y
+mon += sky beast:mutagenic Y
+
+# Drakes
+mon += swamp drake:brown l
+mon += fire drake:red l
+mon += wind drake:white l
+mon += lindwurm:lightcyan l
+mon += death drake:lightgrey l
+
+# Gargoyles and statues
+mon += gargoyle:lightgrey 8
+mon += war gargoyle:lightmagenta 8
+mon += molten gargoyle:yellow 8
+mon += spellforged servitor:magenta 8
+
+# Weapons
+mon += dancing weapon:7
+mon += spectral weapon:green 7
+
+# Demonspawn
+mon += blood saint:9
+mon += chaos champion:9
+mon += warmonger:9
+mon += corrupter:9
+mon += black sun:9
+
+# Others
+mon += fungus:lightgrey f
+mon += thorn hunter:cyan f
+mon += boggart:magenta i
+mon += greater mummy:lightmagenta M
+mon += ancient lich:lightmagenta L
+mon += lightning spire:lightcyan {
 
 #!!! Functions
 
