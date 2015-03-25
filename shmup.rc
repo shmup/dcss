@@ -52,8 +52,9 @@ view_delay                  = 300
 
 #!!! Autopickup
 pickup_mode = multi
-autopickup  = $?!:"/%\
+autopickup = $?!/%
 ae := autopickup_exceptions
+ae =
 ae += (useless|evil)_item
 ae += dangerous_item.*scrolls? of (holy word|noise|torment)
 ae += potions? of (flight|lignification|mutation)
@@ -64,7 +65,7 @@ ae += <(fan of gales|lamp of fire|phial of floods|stone of tremors)
 ae += <phantom mirror
 ae += <unidentified.*(jewellery|book|magical staff|rod)
 ae += <legendary deck
-ae += (beef jerky|pizza)
+# ae += (beef jerky|pizza)
 
 : if you.god ~= "Fedhas" then
     ae += fruit
@@ -128,11 +129,16 @@ ai += identify:@r1
 :end
 
 #!!! Messages
-stop   := runrest_stop_message
-more   := force_more_message
+stop := runrest_stop_message
+more := force_more_message
+stop  =
+more  =
 
-runrest_ignore_poison  = 2:10
+runrest_ignore_poison   = 2:10
 runrest_ignore_monster += butterfly:1
+
+channel.multiturn = mute
+channel.pray      = mute
 
 # Bad things
 stop += found.*trap
