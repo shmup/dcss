@@ -31,6 +31,7 @@ ctrl+o              | show which branches you could/have visit and what depths y
 shift-g             | travel between dungeons
 ctrl-f              | search for drops. i like to 'search armour, search shield, search gift, search artif, etc (useful because you very probably miss drops sometimes. i use this feature often. you should too!
 ( and ) when firing | changes ammo type. less error prone than selecting by letter
+f.                  | fire at target but don't let ammo go past them if misses. useful in cases of friendlies/lava/water
 ff                  | fire at last target
 '                   | swaps between weapons in inventory slot "a" and "b"
 =                   | can reassign inventory slot item letters. useful for swap weapons
