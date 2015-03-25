@@ -311,6 +311,7 @@ command                     | result
     - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
     - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
+    - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/crawl-0.16/)
  * **Communities**
     - [/r/dcss](http://www.reddit.com/r/dcss)
     - [The Tavern](https://crawl.develz.org/tavern/)
