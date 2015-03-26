@@ -304,6 +304,7 @@ command                     | result
  * [cbro webtiles](http://crawl.berotato.org:8080)
  * [Play DCSS Online](http://crawl.develz.org/wordpress/howto)
  * [tournaments](http://dobrazupa.org/tournament/0.16)
+ * [OCTOLOG](http://octotrog.berotato.org/)
  * [dump of bang commands used in #octolog](bang_commands_dump.txt)
  * **Resources**
     - [Search LearnDB](https://lookupdb.guy.ht/)
@@ -312,6 +313,7 @@ command                     | result
     - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
     - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/crawl-0.16/)
+    - [MarvinPA rc](http://crawl.develz.org/configs/trunk/MarvinPA.rc)
  * **Communities**
     - [/r/dcss](http://www.reddit.com/r/dcss)
     - [The Tavern](https://crawl.develz.org/tavern/)
