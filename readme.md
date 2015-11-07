@@ -303,7 +303,7 @@ command                     | result
 
  * [cbro webtiles](http://crawl.berotato.org:8080)
  * [Play DCSS Online](http://crawl.develz.org/wordpress/howto)
- * [tournaments](http://dobrazupa.org/tournament/0.16)
+ * [tournaments](http://crawl.develz.org/wordpress/category/tournament)
  * [OCTOLOG](http://octotrog.berotato.org/)
  * [dump of bang commands used in #octolog](bang_commands_dump.txt)
  * **Resources**
