@@ -57,7 +57,7 @@ show_travel_trail=true       | shows the path that was most recently taken by au
 weapon level | (base attack delay - minimum delay) * 20
 
 ## Where Should I Go Next?
-Here's my branch order, which I think is fairly common. There are times when deviating from this branch order is a good idea, mostly if you encounter something extremely nasty in the branch your trying to clear and can't go around it.
+Here's my branch order, which I think is fairly common. There are times when deviating from this branch order is a good idea, mostly if you encounter something extremely nasty in the branch you're trying to clear and can't go around it.
 
 1. Clear dungeon until I find Lair.
 
@@ -312,7 +312,7 @@ command                     | result
     - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
     - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
-    - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/crawl-0.16/)
+    - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/)
     - [MarvinPA rc](http://crawl.develz.org/configs/trunk/MarvinPA.rc)
  * **Communities**
     - [/r/dcss](http://www.reddit.com/r/dcss)
