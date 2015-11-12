@@ -310,7 +310,7 @@ command                     | result
     - [Search LearnDB](https://lookupdb.guy.ht/)
     - [LearnDB](https://loom.shalott.org/learndb.html)
     - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
-    - [!lg manual](https://github.com/greensnark/dcss_sequell/blob/master/docs/listgame.md)
+    - [!lg manual](https://github.com/crawl/sequell/blob/master/docs/listgame.md)
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
     - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/)
     - [MarvinPA rc](http://crawl.develz.org/configs/trunk/MarvinPA.rc)
