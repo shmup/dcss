@@ -313,6 +313,7 @@ command                     | result
     - !lg manual: https://github.com/crawl/sequell/blob/master/docs/listgame.md
     - command line manual: https://github.com/crawl/sequell/blob/master/docs/commandline.md
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
+    - user defined: https://loom.shalott.org/userdef.html
     - [cbro rcfiles](http://crawl.berotato.org/crawl/rcfiles/)
     - [MarvinPA rc](http://crawl.develz.org/configs/trunk/MarvinPA.rc)
  * **Communities**
