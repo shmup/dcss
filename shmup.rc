@@ -1,559 +1,512 @@
-# TEAMCAPTAIN johnstein
+# TEAMCAPTAIN TooMuchPete
 
-# http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt
+# https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt
+# https://github.com/crawl/crawl/blob/master/crawl-ref/docs/macros_guide.txt
+# inline lua: https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt#L2540
+# http://dobrazupa.org/rcfiles/crawl-0.17/elliptic.rc
 # http://crawl.berotato.org/crawl/rcfiles/crawl-git/
 
-include=hugedmg.rc
+# INTERFACE
+auto_exclude =
+auto_sacrifice = before_explore
+autofight_stop = 50
+autofight_wait = true
+char_set = ascii
+chunks_autopickup = true
+clear_messages = true
+confirm_butcher = never
+cset = cloud:xa4
+cset_ascii=item_orb:0
+default_manual_training = true
+easy_confirm = all
+easy_eat_chunks = true
+hp_colour = 100:green, 99:lightgray, 75:yellow, 50:lightred, 25:red
+hp_warning = 50
+item_stack_summary_minimum = 1
+language = en
+mp_colour = 100:green, 99:lightgray, 75:yellow, 50:lightred, 25:red
+pickup_menu_limit = 1
+show_gold_turns = true
+show_inventory_weights = true
+skill_focus = false
+tile_display_mode = tiles
+tile_map_pixels = 0
+use_animations =
+use_fake_player_cursor = trueallow_self_target = no
 
-#!!! Interface
-allow_self_target           = no
-auto_drop_chunks            = rotten
-auto_drop_chunks            = yes
-auto_eat_chunks             = true
-auto_sacrifice              = before_explore
-autofight_caught            = true
-autofight_stop              = 60
-autofight_stop              = 70
-autofight_throw_nomove      = true
-autofight_wait              = true
-chunks_autopickup           = true
-confirm_butcher             = never
-default_manual_training     = true
-easy_confirm                = all
-easy_door                   = false
-equip_unequip               = true
-explore_delay               = -1
-explore_improved            = true
-fire_items_start            = a
-fire_order                  = launcher, return, tomahawk, rogk, javelin, dart, net, stone, spear, handaxe, dagger, club
-friend_brand                = hi:green
-hp_colour                   = 100:green, 99:lightgray, 75:yellow, 50:lightred, 25:red
-hp_warning                  = 50
-item_stack_summary_minimum  = 1
-jewellery_prompt            = true
-language                    = en
-may_stab_brand              = hi:yellow
-mp_colour                   = 100:green, 99:lightgray, 75:yellow, 50:lightred, 25:red
-neutral_brand               = hi:lightgrey
-sacrifice_before_explore    = true
-show_inventory_weights      = true
-show_player_species         = true
-show_travel_trail           = true
-show_uncursed               = false
-show_waypoints              = true
-skill_focus                 = false
-small_more                  = true
-sort_menus                  = true : equipped, identified, basename, qualname, curse, qty
-stab_brand                  = hi:blue
-stat_colour                 = 7
-travel_delay                = -1
-use_animations             -= player, hp, branch_entry
-view_delay                  = 300
+# TRAVEL
+travel_delay = -1
+rest_delay = -1
+show_travel_trail = false
+explore_improved = true
+explore_stop = items,greedy_pickup,greedy_pickup_gold
+explore_stop += stairs,shops,altars,gates
 
-#!!! Autopickup
-pickup_mode = multi
-autopickup = $?!/%
-ae := autopickup_exceptions
-ae =
-ae += (useless|evil)_item
-ae += dangerous_item.*scrolls? of (holy word|noise|torment)
-ae += potions? of (flight|lignification|mutation)
-ae += wand of (confusion|enslavement|fireball|flame|frost|lightning)
-ae += wand of (magic darts|paralysis|polymorph|random effects|slowing)
-ae += <(throwing net|javelin|tomahawk|stone)
-ae += <(fan of gales|lamp of fire|phial of floods|stone of tremors)
-ae += <phantom mirror
-ae += <unidentified.*(jewellery|book|magical staff|rod)
-ae += <legendary deck
-# ae += (beef jerky|pizza)
-
-: if you.god ~= "Fedhas" then
-    ae += fruit
-: end
-
-: if you.race() ~= "Vampire" then
-    ae += potions? of.*blood
-: end
-
-: if you.god() == "Nemelex Xobeh" then
-    ae += <deck
-: end
-
-: local branch = you.branch()
-: if branch == "Pan" or branch:find("Zig") then
-    autopickup = $
-    ae =
-    ae += (useless|evil)_item
-    ae += <wand of (heal wounds|hasting|teleportation)
-    ae += dangerous_item.*scrolls? of (holy word|torment)
-    ae += <scrolls? of (acquirement|identify|recharging|remove curse)
-    ae += <scrolls? of (amnesia|brand weapon|enchant|magic mapping)
-    ae += <scrolls? of (fog|holy word|torment)
-    ae += <scrolls? of (blinking|teleportation)
-    ae += <potions? of (beneficial mutation|cure mutation|experience)
-    ae += <potions? of (curing|heal wounds|magic|restore abilities)
-    ae += <(meat|bread) ration
-    ae += <legendary deck
-: end
-
-#!!! Inscriptions 
-ai := autoinscribe
-ai += (bad|dangerous)_item.*potion:!q
-ai += (bad|dangerous)_item.*scroll:!r
-ai += potion.*berserk rage:!q
-ai += scroll.*silence:!r
-ai += of faith:!P
-ai += rod:!a
-ai += manual of:!d
-ai += staff of (Wucad Mu|channeling|conjuration|energy|power|wizardry):!a
-ai += wand of (heal wounds|hasting|teleportation):!d
-ai += curing:@q1
-ai += potions? of heal wounds:@q2
-ai += wand of heal wounds:@v2
-ai += potions? of haste:@q3
-ai += wand of hasting:@v3
-ai += scrolls? of teleportation:@r4
-ai += wand of teleportation:@v4
-ai += identify:@r1
-
-: if you.race() == "Vampire" then
-    ai += potions? of.*blood:@q4
-: end
-
-: if you.god() == "Fedhas" then
-    ai += fruit:!e
-: end
-
-:if you.xl() >= 11 then
-    autopickup_exceptions += wand of (disintegration|enslavement|confusion|flame|frost|random effects|magic darts|paralysis|polymorph|random effects|slowing)
-:end
-
-#!!! Messages
 stop := runrest_stop_message
-more := force_more_message
-stop  =
-more  =
+ignore := runrest_ignore_message
+stop =
+ignore =
 
-runrest_ignore_poison   = 2:10
+stop += god:^($|[^J]|J($|[^i]|i($|[^y])))
+stop += The alarm trap emits a blaring wail
+stop += A sentinel's mark forms upon you
+stop += You are starting to lose your buoyancy
+stop += You start to feel a little slower
+stop += Your transformation is almost over
+stop += You start to feel a little uncertain
+stop += Your skin is crawling a little less now
+stop += Your stomach is not as upset anymore
+stop += Your magical contamination has completely faded away
+stop += found.*trap
+stop += You have blundered into a Zot trap
+stop += You fall through a shaft
+stop += flesh start
+stop += Deactivating autopickup
+stop += Your icy armour starts to melt
+: if you.race() == "Ghoul" then
+stop += flesh rotting away
+: end
+
+ignore += bardiche of holy wrath glows black briefly
+
+ignore += pray:
+ignore += talk:
+ignore += talk_visual:
+ignore += friend_spell:
+ignore += friend_enchant:
+ignore += friend_action:
+ignore += sound:
+ignore += You feel.*sick
+ignore += disappears in a puff of smoke
+ignore += engulfed in a cloud of smoke
+ignore += safely over a trap
+ignore += Jiyva gurgles merrily
+ignore += Jiyva appreciates your sacrifice
+ignore += Jiyva says: Divide and consume
+ignore += You hear.*splatter
+ignore += You hear.*slurping noise
+ignore += You feel.*less hungry
+ignore += You feel.*better
+ignore += You feel your power returning
+ignore += engulfed in a cloud of smoke
+ignore += standing in the rain
+ignore += engulfed in white fluffiness
+ignore += A.*toadstool withers and dies
+ignore += toadstools? grows
+ignore += You walk carefully through the
+ignore += You found a web trap!
+
+runrest_ignore_poison  = 2:10
+runrest_ignore_monster += fish:2
+runrest_ignore_monster += shark:2
 runrest_ignore_monster += butterfly:1
 
-channel.multiturn = mute
-channel.pray      = mute
+# AUTOPICKUP
+autopickup = $?!+"/%|
 
-# Bad things
-stop += found.*trap
-stop += (blundered into a|invokes the power of) Zot
-stop += You fall through a shaft
-stop += A sentinel's mark forms upon you\.
-stop += A huge blade swings out and slices into you
-stop += sense of stasis
-stop += flesh start
-stop += (starving|devoid of blood)
-stop += wrath finds you
-stop += lose consciousness
-
-# Expiring effects
-stop += You feel yourself slow down
-stop += You are starting to lose your buoyancy
-stop += You lose control over your flight
-stop += Your hearing returns
-stop += Your transformation is almost over
-stop += back to life
-stop += uncertain
-stop += time is quickly running out
-stop += life is in your own hands
-stop += is no longer charmed
-
-: if you.race() == "Ghoul" then
-stop += smell.*(rott(ing|en)|decay)
-stop += something tasty in your inventory
+ae := autopickup_exceptions
+ae =
+ae += useless_item
+ae += dangerous_item
+ae += evil_item
+ae += amulet of (inaccuracy|the gourmand|controlled flight|warding|stasis)
+ae += amulet of (resist .*|clarity|rage|regeneration|guardian spirit|faith)
+ae += ring of (see invisible|flight|poison resistance|teleportation)
+ae += ring of (invisibility|teleport control)
+ae += ring of (sustain abilities|sustenance|wizardry|life protection)
+ae += potion of lignification
+: if you.race() ~= "Vampire" then
+ae += potion of blood
 : end
+ae += staff of .*
 
-:if you.god() == "Xom" then
-stop += god:
-:else
-ignore += god:
-:end
+default_friendly_pickup = none
+autopickup_no_burden = true
 
-stop += hell_effect:
+{
+local function autopickup(it, name)
+    if it.is_useless then
+        return false
+    end
+    if it.artefact then
+        return true
+    end
+    local class  = it.class(true)
+    if class == "armour" then
+        local good_slots = {cloak="Cloak", helmet="Helmet",
+                            gloves="Gloves", boots="Boots"}
+        st, _ = it.subtype()
+        if good_slots[st] ~= nil and
+           items.equipped_at(good_slots[st]) == nil then
+            return true
+        end
+        if name:find("dragon") or
+           name:find("crystal") then
+            return true
+        end
+    end
+    if class == "weapon" then
+        if name:find("demon") or
+           name:find("quick") or
+           name:find("double") or
+           name:find("eveningstar") or
+           name:find("lajatang") or
+           name:find("triple") or
+           name:find("executioner") then
+            return true
+        end
+    end
+    if class == "missile" then
+        if name:find("curare") then
+            return true
+        end
+    end
+end
 
-# important features
-more += found .* abyssal rune of zot
-more += the mighty pandemonium lord .* resides here
+clear_autopickup_funcs()
+add_autopickup_func(autopickup)
+}
 
-: if you.god() == "ashenzari" then
-    more += you have a vision of.*gates?
-: else
-    more += interdimensional caravan
-    more += distant snort
-    more += roar of battle
-    more += wave of frost
-    more += hiss of flowing sand
-    more += sound of rushing water
-    more += heat about you
-    more += crackle of arcane power
-    more += found a gateway leading out of the abyss
-: end
+# SPELLSLOTS
+spell_slot += regeneration:c
+spell_slot += ensorcelled hibernation:e
+spell_slot += flight:f
+spell_slot += shroud of golubria:g
+spell_slot += ozocubu's armour:o
+spell_slot += stoneskin:o
+spell_slot += phase shift:p
+spell_slot += repel missiles:r
+spell_slot += swiftness:s
+spell_slot += ^blink:v
+spell_slot += dispel undead:x
+spell_slot += sublimation of blood:z
+spell_slot += apportation:A
+spell_slot += blade hands:B
+spell_slot += mephitic cloud:C
+spell_slot += dazzling spray:C
+spell_slot += dispersal:DE
+spell_slot += delayed fireball:DE
+spell_slot += dragon form:DE
+spell_slot += ring of flames:F
+spell_slot += haste:H
+spell_slot += invisibility:I
+spell_slot += ice form:I
+spell_slot += summon ice beast:I
+spell_slot += disjunction:J
+spell_slot += necromutation:L
+spell_slot += borgnjor's revivification:P
+spell_slot += deflect missiles:rR
+spell_slot += statue form:S
+spell_slot += controlled blink:V
+spell_slot += warp weapon:W
+spell_slot += death's door:Y
 
-# interrupts
-more += you don't .* that spell
-more += you fail to use your ability
-more += you miscast.*(blink|borgnjor|door|haste|invisibility)
-more += you can't (read|drink|do)
-more += you cannot .* in your current state
-more += there's nothing to (close|open) nearby
-more += not good enough to have a special ability
-more += you are too berserk
-more += no means to grasp
-more += that item cannot be evoked
-more += this wand has no charges
-more += you are held in a net
-more += you have disarmed
-more += you don't have any such object
-more += do not work when you're silenced
-more += you can't unwield
-more += enough magic points
-more += you feel your control is inadequate
+# low-level attack spells: ag or abg
+spell_slot += freeze:ag
+spell_slot += magic dart:ag
+spell_slot += flame tongue:ag
+spell_slot += pain:ag
+spell_slot += shock:ag
+spell_slot += sandblast:ag
+spell_slot += sting:ag
+spell_slot += beastly appendage:ag
 
-# bad things
-more += your surroundings flicker
-more += sense of stasis
-more += ^your amulet of stasis
-more += you cannot teleport right now
-more += you fall through a shaft
-more += a sentinel's mark forms upon you
-more += (blundered into a|invokes the power of) zot
-more += ouch! that really hurt!
-more += dispelling energy hits you
-more += you convulse
-more += you are blasted by holy energy!
-more += you are (blasted|electrocuted)!
-more += you are.*(confused|poisoned)
-more += flesh start
-more += (starving|devoid of blood)
-more += god:(sends|finds|silent|anger)
-more += you feel a surge of divine spite
-more += lose consciousness
-more += you are too injured to fight blindly
-more += calcifying dust hits
-more += space warps.*around you
-more += space bends around you
-more += hits you.*distortion
-more += watched by something
-more += flickers and vanishes!
+spell_slot += throw frost:abg
+spell_slot += throw flame:abg
+spell_slot += call imp:abg
+spell_slot += confuse:abg
+spell_slot += static discharge:abg
+spell_slot += vampiric draining:abg
+spell_slot += spider form:abg
 
-# hell effects
-more += hell_effect:
+# utility attack spells: deg
+spell_slot += conjure flame:deg
+spell_slot += poisonous cloud:deg
+spell_slot += freezing cloud:deg
+spell_slot += ozocubu's refrigeration:deg
+spell_slot += conjure ball lightning:deg
+spell_slot += animate dead:deg
+spell_slot += recall:deg
+spell_slot += fireball:deg
+spell_slot += airstrike:deg
+spell_slot += iskenderun's battlesphere:deg
+spell_slot += fulminant prism:deg
 
-# expiring effects
-more += you feel yourself slow down
-more += you are starting to lose your buoyancy
-more += you lose control over your flight
-more += your hearing returns
-more += your transformation is almost over
-more += you have a feeling this form
-more += you feel yourself come back to life
-more += uncertain
+# bolts: Bde
+spell_slot += bolt:Bde
+
+# staple spells for killing stuff: abqw or qwde or qwabQW
+spell_slot += stone arrow:abqw
+spell_slot += iskenderun's mystic blast:abqw
+spell_slot += throw icicle:abqw
+
+spell_slot += agony:qwde
+spell_slot += lee's rapid deconstruction:qwde
+
+spell_slot += sticky flame:qwabQW
+spell_slot += iron shot:qwabQW
+spell_slot += poison arrow:qwabQW
+spell_slot += orb of destruction:qwabQW
+spell_slot += lehudib's crystal spear:qwabQW
+spell_slot += chain lightning:qwabQW
+
+# big stuff: QW
+spell_slot += fire storm:QW
+spell_slot += glaciate:QW
+spell_slot += shatter:QW
+spell_slot += tornado:QW
+
+# other spells I might rarely use: inm (sometimes min)
+spell_slot += passage of golubria:inm
+spell_slot += sure blade:inm
+spell_slot += condensation shield:inm
+spell_slot += death channel:inm
+spell_slot += control undead:inm
+spell_slot += mass confusion:min
+spell_slot += olgreb's toxic radiance:inm
+
+# Use defaults that don't intersect other assignments.
+# Some spells are missing from the above lists and should be given better
+# defaults than this at some point.
+spell_slot += .*:ZXUMKGukl
+
+# INSCRIPTIONS
+autoinscribe += distortion:!w
+autoinscribe += potion.*mutation:!q
+autoinscribe += potion.*berserk rage:!q
+autoinscribe += potion.*lignif:!q
+autoinscribe += scroll.*torment:!r
+autoinscribe += scroll.*silence:!r
+autoinscribe += slaying:mikee
+autoinscribe += of faith:!P
+autoinscribe += rod of:!a
+autoinscribe += staff of (Wucad Mu|energy|wizardry|power):!a
+autoinscribe += staff of (conjuration|summoning|poison):!a
+
+# PROMPTS
+# 1st is skill levels, 2nd is XP levels, 3rd is for manuals
+force_more += increases to level
+force_more += You have reached level
+force_more += You have finished your manual
+
+more := force_more_message
+more =
+
+more += Your scales start
+more += Careful!
+more += Found a gateway leading out of the Abyss
+more += Found .* abyssal rune of Zot
+more += You are starting to lose your buoyancy
+more += You start to feel a little slower
+more += Your transformation is almost over
+more += You have a feeling this form
+more += You feel yourself come back to life
+more += You fall through a shaft
+more += The alarm trap emits a blaring wail
+more += You start to feel a little uncertain
 more += time is quickly running out
 more += life is in your own hands
-more += is no longer charmed
-more += your shroud falls apart
-more += you start to feel a little slower
-more += you feel less protected from missiles
+more += dispelling energy hits you
+more += You convulse
+more += god:(sends|finds|silent|anger)
+more += divine experience
+more += You have finished your manual
+more += You are (blasted|electrocuted)!
+more += Your surroundings flicker
+more += The writing blurs in front of your eyes
+more += Space warps.* around you
+more += Space bends around you
+more += The blast of calcifying dust hits you
+more += You feel less protected from missiles
 
-# others
-more += you have reached level
-more += you have finished (your manual|forgetting about)
-more += your scales start
-more += you feel monstrous
-more += jiyva alters your body
-: if you.god() == "xom" then
-more += god:
-: end
-
-#!!! Notes
-dump_message_count     = 30
-dump_order             = header,hiscore,stats,misc,mutations,skills,spells,inventory
-dump_order            += overview,screenshot,monlist,messages,action_counts,vaults
-dump_order            += notes,kills
-dump_book_spells       = false
-note_items             = rod,experience,acquirement,running,of Zot
-note_items            += of resistance,Archmagi,crystal plate armour,dragon armour
-note_items            += artefact,wand of (heal wounds|hasting|teleportation)
-note_hp_percent        = 10
-note_all_skill_levels  = true
-
-#!!! Spell Slots
-# Utility spells
-spell_slot += Dispel Undead:q
-spell_slot += Alistair's Intoxication:Q
-spell_slot += Abjuration:w
-spell_slot += Aura of Abjuration:W
-spell_slot += Apportation:e
-spell_slot += Recall:r
-spell_slot += Summon Butterflies:R
-spell_slot += Control Teleport:t
-spell_slot += Ozocubu's Armour:aA
-spell_slot += Stoneskin:aA
-spell_slot += Phase Shift:aA
-spell_slot += Shroud of Golubria:aA
-spell_slot += Swiftness:s
-spell_slot += Repel Missiles:d
-spell_slot += Deflect Missiles:d
-spell_slot += Darkness:D
-spell_slot += Flight:f
-spell_slot += Ring of Flames:F
-spell_slot += Regeneration:g
-spell_slot += Silence:G
-spell_slot += Haste:h
-spell_slot += Disjunction:H
-spell_slot += Invisibility:j
-spell_slot += Death's Door:J
-spell_slot += Borgnjor's Revivification:L
-spell_slot += Blink:b
-spell_slot += Controlled Blink:B
-spell_slot += Sublimation of Blood:n
-spell_slot += Passwall:N
-spell_slot += Necromutation:M
-spell_slot += Cure Poison:Z
-
-# Transformations
-spell_slot += Beastly Appendage:zxcv
-spell_slot += Spider Form:zxcv
-spell_slot += Ice Form:zxcv
-spell_slot += Blade Hands:zxcv
-spell_slot += Hydra Form:XC
-spell_slot += Statue Form:XC
-spell_slot += Dragon Form:XC
-
-# Low-level spells
-spell_slot += Freeze:z
-spell_slot += Magic Dart:z
-spell_slot += Flame Tongue:z
-spell_slot += Pain:z
-spell_slot += Shock:z
-spell_slot += Sandblast:z
-spell_slot += Sting:z
-spell_slot += Ensorcelled Hibernation:z
-spell_slot += Infusion:z
-spell_slot += Summon Small Mammal:zxc
-spell_slot += Throw Frost:zxc
-spell_slot += Throw Flame:zxc
-spell_slot += Searing Ray:zxc
-spell_slot += Call Imp:zxc
-spell_slot += Slow:zxc
-spell_slot += Corona:Z
-spell_slot += Animate Skeleton:Z
-spell_slot += Confusing Touch:ZX
-spell_slot += Sticks to Snakes:ZX
-spell_slot += Sure Blade:ZX
-spell_slot += Conjure Flame:ZX
-
-# Mid-level spells
-spell_slot += Stone Arrow:zxcv
-spell_slot += Dazzling Spray:zxcv
-spell_slot += Iskenderun's Mystic Blast:zxcv
-spell_slot += Force Lance:zxcv
-spell_slot += Sticky Flame:zxcv
-spell_slot += Throw Icicle:zxcv
-spell_slot += Venom Bolt:zxcv
-spell_slot += Call Canine Familiar:zxcv
-spell_slot += Summon Ice Beast:zxcv
-spell_slot += Summon Demon:zxcv
-spell_slot += Airstrike:zxcv
-spell_slot += Agony:zxcv
-spell_slot += Petrify:zxcv
-spell_slot += Vampiric Draining:zxcv
-spell_slot += Song of Slaying:zxcv
-spell_slot += Spectral Weapon:zxcv
-spell_slot += Confuse:zxcv
-spell_slot += Mephitic Cloud:cC
-spell_slot += Static Discharge:ZX
-spell_slot += Summon Guardian Golem:ZX
-spell_slot += Summon Lightning Spire:ZX
-spell_slot += Control Undead:ZX
-spell_slot += Fulminant Prism:ZX
-spell_slot += Battlesphere:XC
-spell_slot += Lee's Rapid Deconstruction:XC
-spell_slot += Poisonous Cloud:XC
-spell_slot += Freezing Cloud:XC
-spell_slot += Ozocubu's Refrigeration:XC
-spell_slot += Animate Dead:XC
-spell_slot += Olgreb's Toxic Radiance:XC
-
-# High-level spells
-spell_slot += Lightning Bolt:xcv
-spell_slot += Fireball:xcv
-spell_slot += Bolt of:xcv
-spell_slot += Iron Shot:xcv
-spell_slot += Poison Arrow:xcv
-spell_slot += Orb of Destruction:xcv
-spell_slot += Lehudib's Crystal Spear:xcv
-spell_slot += Chain Lightning:XCV
-spell_slot += Fire Storm:V
-spell_slot += Glaciate:V
-spell_slot += Shatter:V
-spell_slot += Tornado:V
-
-# Default letters
-spell_slot += .*:yuiopYUIOP
-
-#!!! Bindings
+# MACROS
 bindkey = [&] CMD_NO_CMD_DEFAULT
 bindkey = [\] CMD_TARGET_OBJ_CYCLE_FORWARD
 bindkey = [/] CMD_SEARCH_STASHES
 bindkey = [^I] CMD_TARGET_CYCLE_FORWARD
 bindkey = [S] CMD_SAVE_GAME_NOW
 
-#!! Glyphs
-show_player_species = true
+# NOTES
+dump_order = header,hiscore,stats,misc,mutations,skills,spells,inventory
+dump_order += messages,screenshot,monlist,kills,notes,vaults,action_counts
+ood_interesting = 6
+note_hp_percent = 20
+note_skill_levels = 1,3,6,9,12,15,18,21,24,27
+note_all_spells = true
+note_items =
+note_items += of Zot
+note_messages =
+note_messages += Your scales start
+note_messages += protects you from harm
+note_messages += You fall through a shaft
+note_monsters =
+note_monsters += orb of fire, ancient lich, electric golem
 
-# Features
-# cset_unicode = item_gold:xa3
-cset_unicode = item_gold:x24
-cset_unicode = cloud:#
-feature = explore horizon {.,,green}
-feature = (closed|runed|sealed) door {+,,}
-
-mon := mon_glyph
-
-# Uniques
-mon += Louise:blue
-
-# Insects
-mon += giant cockroach:brown B
-mon += boring beetle:yellow B
-mon += giant mite:lightred B
-mon += demonic crawler:green B
-mon += worker ant:red B
-mon += queen ant:lightgreen B
-mon += soldier ant:white B
-
-# Flying insects
-mon += queen bee:lightgreen y
-mon += vampire mosquito:lightgrey y
-
-# Canines
-mon += hog:lightred
-mon += hell hog:lightmagenta
-
-# Beasts
-mon += ice beast:ice Y
-mon += sky beast:mutagenic Y
-
-# Drakes
-mon += swamp drake:brown l
-mon += fire drake:red l
-mon += wind drake:white l
-mon += lindwurm:lightcyan l
-mon += death drake:lightgrey l
-
-# Gargoyles and statues
-mon += gargoyle:lightgrey 8
-mon += war gargoyle:lightmagenta 8
-mon += molten gargoyle:yellow 8
-mon += spellforged servitor:magenta 8
-
-# Weapons
-mon += dancing weapon:7
-mon += spectral weapon:green 7
-
-# Demonspawn
-mon += blood saint:9
-mon += chaos champion:9
-mon += warmonger:9
-mon += corrupter:9
-mon += black sun:9
-
-# Others
-mon += fungus:lightgrey f
-mon += thorn hunter:cyan f
-mon += boggart:magenta i
-mon += greater mummy:lightmagenta M
-mon += ancient lich:lightmagenta L
-mon += lightning spire:lightcyan {
-
-#!!! Functions
-
-# weapon and armour autopickup by medar (and others)
 {
-    local function armour_plus(it)
-        local plus = string.gsub(it.name(), "+", "", 1)
-        return tonumber(string.gsub(plus, "[^-%d]", ""))
+    -- ready!
+
+    function ready()
+        DmgTrack()
+        SkillTrack()
     end
 
-    local function autopickup(it, name)
-        if it.is_useless then
-            return
-        end
-        local class = it.class(true)
-        if class == "armour" then
-            local good_slots = {cloak="cloak", helmet="helmet",
-                                gloves="gloves", boots="boots"}
-            st, _ = it.subtype()
-            if good_slots[st] ~= nil then
-                if good_slots[st] == "gloves" and you.has_claws() > 0 then
-                  return
-                end
+    -- hugedmg
+    local dmg_old_hp = 0 
 
-                if it.branded then return true end
-
-                local cur = items.equipped_at(good_slots[st])
-                if cur == nil then return true end
-
-                if cur.branded or cur.artefact then return end
-                if armour_plus(it) ~= nil then
-                    if armour_plus(it) > armour_plus(cur) then return true end
+    function DmgTrack()
+        local bot_hp, bot_mhp = you.hp()
+        local dmg_inturn = 0
+        local huge_int = 0
+        local percent_hp = 0
+        local percent_old_hp = 0
+        local percent_hp_txt = "--%"
+        if dmg_old_hp > 0 then
+            if bot_hp < dmg_old_hp then
+                dmg_inturn = dmg_old_hp - bot_hp
+                percent_old_hp = math.ceil((dmg_old_hp*100)/bot_mhp)
+                percent_hp = math.ceil((bot_hp*100)/bot_mhp)
+                percent_hp_txt = percent_hp .. "%"
+                if percent_hp < 30 then
+                    percent_hp_txt = "<red>" .. percent_hp_txt .. "</red>"
+                elseif percent_hp < 55 then
+                    percent_hp_txt = "<lightred>" .. percent_hp_txt .. "</lightred>"
+                elseif percent_hp < 75 then
+                    percent_hp_txt = "<yellow>" .. percent_hp_txt .. "</yellow>"
+                end    
+                percent_hp_txt = percent_hp_txt .. "<darkgray>(" .. bot_hp .. "hp)</darkgray>"
+                if dmg_inturn > (bot_hp*0.25) then
+                    huge_dmg_note(dmg_inturn)
+                    crawl.mpr("<white>Huge Dmg:</white> <red>-" .. (percent_old_hp-percent_hp) .. "%<darkgray>(-" .. dmg_inturn .. "hp)</darkgray>" .. "</red> hp: " .. percent_hp_txt)
+                    dmg_old_hp = bot_hp
+                    crawl.flush_prev_message()
+                    crawl.more()
+                    crawl.more_autoclear(true)
                 else
-                    if armour_plus(cur) < 0 then return true end
+                    if dmg_inturn > (bot_hp*0.15) then
+                        crawl.mpr("<white>Damage</white>: <yellow>-" .. (percent_old_hp-percent_hp) .. "%<darkgray>(-" .. dmg_inturn .. "hp)</darkgray>" .. "</yellow>   hp: " .. percent_hp_txt)
+                    else
+                        crawl.mpr("<white>Damage</white>: -" .. (percent_old_hp-percent_hp) .. "%<darkgray>(-" .. dmg_inturn .. "hp)</darkgray>" .. "   hp: " .. percent_hp_txt)
+                    end
                 end
-            elseif st == "body" then
-                local cur = items.equipped_at("armour")
-                if cur == nil then return end
-                if cur.name("qual") ~= it.name("qual") then return end
-
-                if it.branded then return true end
-
-                if cur.branded or cur.artefact then return end
-                if armour_plus(it) ~= nil then
-                    if armour_plus(it) > armour_plus(cur) then return true end
-                else
-                    if armour_plus(cur) < 0 then return true end
-                end
+                crawl.flush_prev_message()
             end
         end
-        if class == "missile" then
-          if name:find("curare") then
-            return true
-          end
-          if name:find("confusion") or
-             name:find("paralysis") or
-             name:find("frenzy") or
-             name:find("sleeping") or
-             name:find("slowing")  then
+        dmg_old_hp = bot_hp
+    end
+
+    function huge_dmg_note(x)
+        crawl.take_note("Huge Dmg: " .. x .. " dmg") 
+    end
+
+    -- elliptic's skill shit
+    local did_first_turn = false
+
+    function SkillTrack()
+        if not did_first_turn then
+            did_first_turn = true
+            if you.turns() == 0 then
+                first_turn_of_game()
+            end
+            if c_persist.message and c_persist.message ~= "nil"
+                and c_persist.message ~= "" then
+                crawl.mpr("Message: " .. c_persist.message)
+                c_persist.message = nil
+            end
+        end
+        check_skills()
+        if c_persist.set_target_skill == 0 then
+            set_target_skill()
+            c_persist.set_target_skill = nil
+        elseif c_persist.set_target_skill then
+            c_persist.set_target_skill = c_persist.set_target_skill - 1
+        end
+    end
+
+    skill_list = {"Fighting", "Short Blades", "Long Blades", "Axes", "Maces & Flails",
+                  "Polearms", "Staves", "Unarmed Combat", "Bows", "Crossbows",
+                  "Throwing", "Slings", "Armour", "Dodging", "Shields", "Spellcasting",
+                  "Conjurations", "Hexes", "Charms", "Summonings", "Necromancy",
+                  "Translocations", "Transmutations", "Fire Magic", "Ice Magic",
+                  "Air Magic", "Earth Magic", "Poison Magic", "Invocations",
+                  "Evocations", "Stealth"}
+
+    function record_current_skills(maxlev)
+        c_persist.skill_list = { }
+        for _,sk in ipairs(skill_list) do
+            if you.train_skill(sk) > 0 and you.base_skill(sk) < (maxlev or 27) then
+                table.insert(c_persist.skill_list, sk)
+            end
+        end
+    end
+
+    function check_skills()
+        if not c_persist.skill_list or not c_persist.target_skill then
             return
-          end
         end
-        return
+        for _,sk in ipairs(c_persist.skill_list) do
+            if you.base_skill(sk) >= c_persist.target_skill then
+                crawl.formatted_mpr(sk .. " reached " .. c_persist.target_skill
+                .. ".", "prompt")
+                crawl.more()
+                c_persist.target_skill = nil
+                set_new_skill_training()
+                return
+            end
+        end
     end
 
-    add_autopickup_func(autopickup)
-}
-
-# pick up potions or scroll that match any already carried
-{
-    local function pickup_stackable(it, name)
-      if it.class == "potion" or it.class == "scroll" then
-        for inv in iter.invent_iterator:new(items.inventory()) do
-          if it.class(true) == inv.class(true)
-          and it.subtype() == inv.subtype() then
-            return true
-          end
-        end
-      end
-
-      return
+    function set_new_skill_training()
+        c_persist.set_target_skill = 1
+        crawl.sendkeys('m')
     end
 
-    add_autopickup_func(pickup_stackable)
+    function set_target_skill()
+        record_current_skills()
+        local str = "Currently training: "
+        local first_skill = true
+        for _,sk in ipairs(c_persist.skill_list) do
+            val = you.base_skill(sk)
+            if first_skill then
+                str = str .. sk .. "(" .. val .. ")"
+            else
+                str = str .. ", " .. sk .. "(" .. val .. ")"
+            end
+            first_skill = false
+        end
+        str = str .. "."
+        crawl.formatted_mpr(str, "prompt")
+        crawl.formatted_mpr("Choose a target skill level: ", "prompt")
+        c_persist.target_skill = tonumber(crawl.c_input_line())
+        record_current_skills(c_persist.target_skill)
+    end
+
+    function control(c)
+        return string.char(string.byte(c) - string.byte('a') + 1)
+    end
+
+    function save_with_message()
+        if you.turns() == 0 then
+            crawl.sendkeys("S")
+            return
+        end
+        crawl.formatted_mpr("Save game and exit?", "prompt")
+        local res = crawl.getch()
+        if not (string.char(res) == "y" or string.char(res) == "Y") then
+            crawl.formatted_mpr("Okay, then.", "prompt")
+            return
+        end
+        crawl.formatted_mpr("Leave a message: ", "prompt")
+        local res = crawl.c_input_line()
+        c_persist.message = res
+        crawl.sendkeys(control("s"))
+    end
+
+    function first_turn_of_game()
+        for key,_ in pairs(c_persist) do
+            if key ~= "record" then
+                c_persist[key] = nil
+            end
+        end
+        set_new_skill_training()
+    end
 }
