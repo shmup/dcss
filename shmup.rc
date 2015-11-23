@@ -1,5 +1,3 @@
-# TEAMCAPTAIN TooMuchPete
-
 # https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt
 # https://github.com/crawl/crawl/blob/master/crawl-ref/docs/macros_guide.txt
 # inline lua: https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt#L2540
@@ -282,6 +280,9 @@ autoinscribe += of faith:!P
 autoinscribe += rod of:!a
 autoinscribe += staff of (Wucad Mu|energy|wizardry|power):!a
 autoinscribe += staff of (conjuration|summoning|poison):!a
+: if you.race() ~= "Vampire" then
+autoinscribe += blood:@q1
+: end
 
 # PROMPTS
 # 1st is skill levels, 2nd is XP levels, 3rd is for manuals
