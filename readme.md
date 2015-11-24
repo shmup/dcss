@@ -311,6 +311,7 @@ command                     | result
     - [LearnDB](https://loom.shalott.org/learndb.html)
     - [Crawl Wiki](http://crawl.chaosforge.org/Crawl_Wiki)
     - !lg manual: https://github.com/crawl/sequell/blob/master/docs/listgame.md
+    - FooTV guide: https://github.com/crawl/sequell/blob/master/docs/listgame.md#footv
     - command line manual: https://github.com/crawl/sequell/blob/master/docs/commandline.md
     - [RC Options](http://git.develz.org/?p=crawl.git;a=blob;f=crawl-ref/docs/options_guide.txt)
     - user defined: https://loom.shalott.org/userdef.html
