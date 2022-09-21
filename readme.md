@@ -52,7 +52,7 @@ pickup_mode=multi            | a menu of items on ground that you toggle + or - 
 show_travel_trail=true       | shows the path that was most recently taken by autoexplore. Particularly useful if you are using explore_delay=-1 described above.
 
 ### Formulas
-             | formula
+|             | formula
 ------       | --------
 weapon level | (base attack delay - minimum delay) * 20
 
