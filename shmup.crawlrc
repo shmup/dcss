@@ -1,0 +1,145 @@
+# TEAMNAME Zin City
+# TEAMMEMBERS shmup ces Lucai neckro23 helicomatic
+# https://crawl.develz.org/tournament/0.30
+# https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt
+# https://github.com/crawl/crawl/blob/master/crawl-ref/settings/advanced_optioneering.txt
+
+macros += M \{9} za
+
+warn_hatches = true
+always_show_zot = true
+
+action_panel_show = true
+action_panel_glyphs = true
+
+explore_wall_bias = 1
+
+##### travel quicker, showing path used
+OPTION = show_travel_trail, travel_delay:-1, rest_delay: -1
+explore_stop =
+explore_stop += items,stairs,shops,altars,portals,runed_doors
+explore_stop += greedy_items,greedy_pickup_smart,greedy_visited_item_stack
+auto_exclude =
+auto_exclude += oklob,statue,roxanne,hyperactive,lightning spire
+
+##### things for impatient, bad players
+OPTION = hp_warning:70, autofight_stop:70
+
+##### ui improvements
+OPTION = clear_messages, use_animations:hp, easy_confirm:all, small_more
+
+##### training
+OPTION = default_manual_training
+
+##### a e s t h e t i c
+char_set = ascii
+OPTION = allow_extended_colours, show_player_species
+display_char = wall:x2592
+display_char = permawall:x2593
+display_char = wall_magic:x2591
+cset_unicode = cloud:#
+cset_unicode = cloud_weak:xa7
+cset_unicode = cloud_fading:x263c
+feature = (closed|runed|sealed) door {+,,}
+
+##### loot settings
+item_stack_summary_minimum = 1
+pickup_menu_limit = 1
+autopickup = $?!+"/|(
+ae := autopickup_exceptions
+
+# nullifying the effect of the most annoying 0.24 commit:
+ae += >ring of (poi|resist cor|fli|see)
+ae += >amulet of
+
+ae += >scrolls? of (amn|vuln|noise)
+ae += >potions? of ligni
+ae += >wand of rand
+ae += >ring of (protection from (mag|fire|cold)|mag|stealth|ice|fire|pos|wiz)
+ae ^= <potions? of mutation
+ae ^= <scrolls? of immolation
+ae += <throwing net
+ae += <(lamp of fire|phial of floods|lightning rod)
+ae += <sack of spiders
+ae += <phantom mirror
+ae += <box of beasts
+ae += <deck
+ae += <assassin
+ae += <god gift
+ae += <artefact
+
+##### missile prefs
+fire_order  = launcher
+fire_order += javelin, boomerang, rock, net, dart, stone
+fire_order += inscribed
+
+equip_unequip = true
+
+##### allows a single / to init search prompt
+use_modifier_prefix_keys = false
+bindkey = [/] CMD_SEARCH_STASHES
+
+##### remappings
+bindkey = [S] CMD_SAVE_GAME_NOW
+bindkey = [~] CMD_QUIT
+
+##### autopickup++
+{
+-- Equipment autopickup (by Medar and various others)
+local function pickup_equipment(it, name)
+  if it.is_useless then return end
+
+  local class = it.class(true)
+  if class == "armour" then
+    local good_slots = {cloak="Cloak", helmet="Helmet",
+                        gloves="Gloves", boots="Boots"}
+    st, _ = it.subtype()
+
+    if good_slots[st] ~= nil then
+      if good_slots[st] == "Gloves" and you.has_claws() > 0 then return end
+
+      if it.artefact then return true end
+
+      local cur = items.equipped_at(good_slots[st])
+      if cur == nil then return true end
+
+      if cur.branded or cur.artefact then return end
+      if it.branded then return true end
+    elseif st == "body" then
+      local cur = items.equipped_at("armour")
+      if cur == nil then return end
+      if cur.name("qual") ~= it.name("qual") then return end
+
+      if it.artefact then return true end
+
+      if cur.branded or cur.artefact then return end
+      if it.branded then return true end
+    end
+  end
+  return
+end
+
+-- Autopickup of stackable items
+local function pickup_stackable(it, name)
+  local class = it.class(true)
+  if class == "potion"
+     or class == "scroll"
+     or class == "missile"
+     or class == "miscellaneous" then
+    if it.stacks() then return true end
+  end
+  return
+end
+
+local need_skills_opened = true
+function ready()
+  if you.turns() == 0 and need_skills_opened then
+    need_skills_opened = false
+    crawl.sendkeys("m")
+  end
+end
+
+clear_autopickup_funcs()
+add_autopickup_func(pickup_equipment)
+add_autopickup_func(pickup_stackable)
+}
