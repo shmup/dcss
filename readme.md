@@ -2,7 +2,7 @@
 
 [Dungeon Crawl Stone Soup](https://en.wikipedia.org/wiki/Dungeon_Crawl_Stone_Soup) is a [roguelike](https://en.wikipedia.org/wiki/Roguelike) where the player creates a character and guides it through a diverse branching dungeon, full of monsters and items, with the goal of retrieving at least 3 of the 15 "runes of Zot", fetching the Orb of Zot, and escaping alive.
 
-_rng [giveth](http://i.imgur.com/XV18fWm); rng [taketh](http://i.imgur.com/EQgGwVt)_
+_rng [giveth](https://i.imgur.com/XV18fWm.png); rng [taketh](https://i.imgur.com/EQgGwVt.png)_
 
 ## Contents
  - [Useful Commands](#useful-commands)
