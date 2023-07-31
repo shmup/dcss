@@ -3,6 +3,8 @@
 # ┌─┐┬─┐┌─┐┬ ┬┬     helper script to launch consoles
 # │  ├┬┘├─┤││││     run `crawl --setup` to sync keys
 # └─┘┴└─┴ ┴└┴┘┴─┘   run `crawl --help` to see usage
+# 
+# sourced from http://crawl.develz.org/wordpress/howto
 
 declare -A servers
 declare -A keys
