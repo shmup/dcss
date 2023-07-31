@@ -4,8 +4,7 @@
 # │  ├┬┘├─┤││││     run `crawl setup` to sync keys
 # └─┘┴└─┴ ┴└┴┘┴─┘   run `crawl help` to see usage
 #
-# sourced from http://crawl.develz.org/wordpress/howto
-
+# sourced: http://crawl.develz.org/wordpress/howto
 # example: https://asciinema.org/a/bAHcjKamF5tlpgukL2VpJbGBU
 
 declare -A servers
