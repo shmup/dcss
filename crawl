@@ -6,6 +6,8 @@
 #
 # sourced from http://crawl.develz.org/wordpress/howto
 
+# example: https://asciinema.org/a/bAHcjKamF5tlpgukL2VpJbGBU
+
 declare -A servers
 declare -A keys
 servers=(
