@@ -3,7 +3,7 @@
 # ┌─┐┬─┐┌─┐┬ ┬┬     helper script to launch consoles
 # │  ├┬┘├─┤││││     run `crawl --setup` to sync keys
 # └─┘┴└─┴ ┴└┴┘┴─┘   run `crawl --help` to see usage
-# 
+#
 # sourced from http://crawl.develz.org/wordpress/howto
 
 declare -A servers
@@ -25,9 +25,20 @@ keys=(
   ["cxc_key"]="http://crawl.develz.org/cao_key"
 )
 
-lime() { tput bold; tput setaf 2; }
-reset() { tput sgr0; }
-error_msg() { echo "$(lime)Error:$(reset) $1" >&2; }
+display_colored_text() {
+  local color=$1
+  local text=$2
+  case $color in
+    "green") tput setaf 2 ;;
+    *) tput setaf 1 ;;
+  esac
+  tput bold
+  echo "$text"
+  tput sgr0
+}
+display_error_msg() {
+  display_colored_text "red" "Error: $1" >&2
+}
 validate_and_ssh() {
   local key="$HOME/.ssh/${1}_key"
   local address=$2
@@ -41,12 +52,12 @@ validate_and_ssh() {
   if [ -f "$key" ]; then
     TERM=xterm ssh -i "$key" "$address" -p "$port"
   else
-    error_msg "SSH key $key not found"
-    error_msg "Try running crawl --setup if you haven't"
+    display_error_msg "SSH key $key not found"
+    display_error_msg "Try running crawl --setup if you haven't"
     exit 1
   fi
 }
-function download_keys {
+download_keys() {
   [ ! -d "$HOME/.ssh" ] && mkdir "$HOME/.ssh"
   [ "$(stat -c %a "$HOME/.ssh")" -lt 400 ] && chmod 400 "$HOME/.ssh"
 
@@ -66,7 +77,6 @@ function download_keys {
 
   echo "Keys setup complete"
 }
-
 display_help() {
   echo "Usage: $0 [option]"
   echo
@@ -83,7 +93,7 @@ while true; do
     server_keys=("${!servers[@]}")
     server_keys_joined=$(printf ", %s" "${server_keys[@]}")
     server_keys_joined=${server_keys_joined:2}
-    echo "choices: $(lime)${server_keys_joined}$(reset)"
+    display_colored_text "green" "choices: ${server_keys_joined}"
     read -r -p "type a server: " server
   } || server=$1
   shift
@@ -104,7 +114,7 @@ while true; do
     if [[ -n "${servers[$server]}" ]]; then
       validate_and_ssh "$server" "${servers[$server]}"
     else
-      error_msg "invalid server."
+      display_error_msg "invalid server."
     fi
     ;;
   esac
