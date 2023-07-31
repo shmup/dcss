@@ -40,6 +40,8 @@ validate_and_ssh() {
     TERM=xterm ssh -i "$key" "$address" -p "$port"
   else
     error_msg "SSH key $key not found"
+    error_msg "Try running crawl --setup if you haven't"
+    exit 1
   fi
 }
 function download_keys {
@@ -85,7 +87,10 @@ while true; do
   shift
 
   case $server in
-  "-s" | "--setup")
+  "quit")
+    exit 0
+    ;;
+  "setup" | "-s" | "--setup")
     download_keys
     exit 0
     ;;
