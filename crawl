@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+
+# ┌─┐┬─┐┌─┐┬ ┬┬     helper script to launch consoles
+# │  ├┬┘├─┤││││     run `crawl --setup` to sync keys
+# └─┘┴└─┴ ┴└┴┘┴─┘   run `crawl --help` to see usage
+
+declare -A servers
+declare -A keys
+servers=(
+  ["cao"]="joshua@crawl.akrasiac.org"  # AZ
+  ["cbro"]="crawler@cbro.berotato.org" # OH
+  ["cko"]="terminal@crawl.kelbi.org"   # NY
+  ["cdo"]="crawl@crawl.develz.org"     # GERMANY
+  ["cue"]="terminal@underhound.eu:23"  # AMSTERDAM
+  ["cxc"]="crawl@crawl.xtahua.com"     # FRANCE
+)
+keys=(
+  ["cao_key"]="http://crawl.develz.org/cao_key"
+  ["cbro_key"]="https://cbro.berotato.org/keys/cbro_key"
+  ["cdo_key"]="http://crawl.develz.org/cao_key"
+  ["cko_key"]="https://crawl.kelbi.org/crawl/cao_key"
+  ["cue_key"]="http://crawl.develz.org/cao_key"
+  ["cxc_key"]="http://crawl.develz.org/cao_key"
+)
+
+lime() { tput bold; tput setaf 2; }
+reset() { tput sgr0; }
+error_msg() { echo "$(lime)Error:$(reset) $1" >&2; }
+validate_and_ssh() {
+  local key="$HOME/.ssh/${1}_key"
+  local address=$2
+  local port=22
+
+  if [[ $2 == *":"* ]]; then
+    address=${2%%:*}
+    port=${2#*:}
+  fi
+
+  if [ -f "$key" ]; then
+    TERM=xterm ssh -i "$key" "$address" -p "$port"
+  else
+    error_msg "SSH key $key not found"
+  fi
+}
+function download_keys {
+  [ ! -d "$HOME/.ssh" ] && mkdir "$HOME/.ssh"
+  [ "$(stat -c %a "$HOME/.ssh")" -lt 400 ] && chmod 400 "$HOME/.ssh"
+
+  for key in "${!keys[@]}"; do
+    if [ ! -f "$HOME/.ssh/$key" ]; then
+      echo "Downloading $key"
+      curl -o "$HOME/.ssh/$key" "${keys[$key]}" || {
+        echo "Failed to download $key"
+        exit 1
+      }
+    else
+      echo "$key already exists"
+    fi
+
+    chmod 600 "$HOME/.ssh/$key"
+  done
+
+  echo "Keys setup complete"
+}
+
+display_help() {
+  echo "Usage: $0 [option]"
+  echo
+  echo "Options:"
+  for server in "${!servers[@]}"; do
+    echo -e "  $server\t\tconnect to $server"
+  done
+  echo -e "  -s, --setup\tdownload and configure ssh keys"
+  echo -e "  -h, --help\tshow this help message"
+}
+
+while true; do
+  [ $# -eq 0 ] && {
+    server_keys=("${!servers[@]}")
+    server_keys_joined=$(printf ", %s" "${server_keys[@]}")
+    server_keys_joined=${server_keys_joined:2}
+    echo "choices: $(lime)${server_keys_joined}$(reset)"
+    read -r -p "type a server: " server
+  } || server=$1
+  shift
+
+  case $server in
+  "-s" | "--setup")
+    download_keys
+    exit 0
+    ;;
+  "help" | "-h" | "--help")
+    display_help
+    exit 0
+    ;;
+  *)
+    if [[ -n "${servers[$server]}" ]]; then
+      validate_and_ssh "$server" "${servers[$server]}"
+    else
+      error_msg "invalid server."
+    fi
+    ;;
+  esac
+done
