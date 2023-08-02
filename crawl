@@ -58,6 +58,9 @@ validate_and_ssh() {
     exit 1
   fi
 }
+fooTV() {
+  telnet termcast.shalott.org
+}
 download_keys() {
   [ ! -d "$HOME/.ssh" ] && mkdir "$HOME/.ssh"
   [ "$(stat -c %a "$HOME/.ssh")" -lt 400 ] && chmod 400 "$HOME/.ssh"
@@ -85,6 +88,7 @@ display_help() {
   for server in "${!servers[@]}"; do
     echo -e "  $server\t\tconnect to $server"
   done
+  echo -e "  tv\t\thttps://termcast.shalott.org/tv"
   echo -e "  -s, --setup\tdownload and configure ssh keys"
   echo -e "  -h, --help\tshow this help message"
 }
@@ -94,7 +98,7 @@ while true; do
     server_keys=("${!servers[@]}")
     server_keys_joined=$(printf ", %s" "${server_keys[@]}")
     server_keys_joined=${server_keys_joined:2}
-    display_colored_text "green" "choices: ${server_keys_joined}"
+    display_colored_text "green" "choices: ${server_keys_joined}, tv"
     read -r -p "type a server: " server
   } || server=$1
   shift
@@ -110,6 +114,9 @@ while true; do
   "help" | "-h" | "--help")
     display_help
     exit 0
+    ;;
+  "tv")
+    fooTV
     ;;
   *)
     if [[ -n "${servers[$server]}" ]]; then
