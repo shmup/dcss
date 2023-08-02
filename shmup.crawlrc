@@ -4,15 +4,10 @@
 # https://github.com/crawl/crawl/blob/master/crawl-ref/docs/options_guide.txt
 # https://github.com/crawl/crawl/blob/master/crawl-ref/settings/advanced_optioneering.txt
 
-macros += M \{9} za
-
-warn_hatches = true
 always_show_zot = true
 
-action_panel_show = true
-action_panel_glyphs = true
-
-explore_wall_bias = 1
+# tab fires spell `a`
+macros += M \{9} za
 
 ##### travel quicker, showing path used
 OPTION = show_travel_trail, travel_delay:-1, rest_delay: -1
@@ -24,6 +19,9 @@ auto_exclude += oklob,statue,roxanne,hyperactive,lightning spire
 
 ##### things for impatient, bad players
 OPTION = hp_warning:70, autofight_stop:70
+explore_wall_bias = 1
+travel_open_doors = avoid
+warn_hatches = true
 
 ##### ui improvements
 OPTION = clear_messages, use_animations:hp, easy_confirm:all, small_more
@@ -73,6 +71,7 @@ fire_order  = launcher
 fire_order += javelin, boomerang, rock, net, dart, stone
 fire_order += inscribed
 
+# easy equip/unequip
 equip_unequip = true
 
 ##### allows a single / to init search prompt
