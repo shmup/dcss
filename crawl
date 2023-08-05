@@ -83,15 +83,17 @@ download_keys() {
 help() {
   echo "Usage: $0 [option]"
   echo
-  echo "crawl options:"
+  echo "dcss options:"
   for server in "${!servers[@]}"; do
     echo -e "  $server\t\tconnect to $server"
   done
+  echo -e "  cue\t\tlatest + bcrawl"
   echo -e "  tv\t\thttps://termcast.shalott.org/tv"
   echo
   echo "nethack options:"
   echo -e "  nao\t\tofficial"
   echo -e "  hdf\t\thas a ton of variants"
+  echo -e "  ghc\t\tofficial gnollhack"
   echo
   echo "misc:"
   echo -e "  -s, --setup\tdownload and configure ssh keys"
@@ -123,6 +125,7 @@ while true; do
   "help" | "-h" | "--help") help;;
   "tv") telnet termcast.shalott.org;;
   "nao") ssh nethack@alt.org;;
+  "ghc") ssh play@server.gnollhack.com;;
   "cue") ssh -i ~/.ssh/cue_key terminal@underhound.eu -p 23;;
   "hdf")
     # Hardfought variants:
