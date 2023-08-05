@@ -105,13 +105,14 @@ while true; do
     server_keys=("${!servers[@]}")
     server_keys_joined=$(printf ", %s" "${server_keys[@]}")
     server_keys_joined=${server_keys_joined:2}
-    printf "crawl: "; display_colored_text "green" "${server_keys_joined}, tv"
-    printf "bcrawl: "; display_colored_text "green" "cue"
+    display_colored_text "red" "xom smiles"
     echo
+    printf "dcss: "; display_colored_text "green" "${server_keys_joined}, tv"
+    printf "bcrawl: "; display_colored_text "green" "cue"
     printf "nethack: "; display_colored_text "green" "nao, hdf"
     printf "gnollhack: "; display_colored_text "green" "ghc"
     echo
-    read -r -p "choose: " server
+    read -r -p "choice: " server
   } || server=$1
   shift
 
