@@ -1,21 +1,23 @@
 #!/usr/bin/env bash
 
-# ┌─┐┬─┐┌─┐┬ ┬┬     helper script to launch consoles
-# │  ├┬┘├─┤││││     run `crawl setup` to sync keys
-# └─┘┴└─┴ ┴└┴┘┴─┘   run `crawl help` to see usage
+#   ████   helper script to launch consoles
+#  █    █  run `crawl setup` to sync keys
+#  █ ██ █  run `crawl help` to see usage
+#  █ ████
+#  █       http://crawl.develz.org/wordpress/howto
+#   ████   https://asciinema.org/a/bAHcjKamF5tlpgukL2VpJbGBU
 #
-# sourced: http://crawl.develz.org/wordpress/howto
-# example: https://asciinema.org/a/bAHcjKamF5tlpgukL2VpJbGBU
+#   NOTE: I want to look into fonts to document
+#         https://int10h.org/oldschool-pc-fonts/fontlist/?1#ibm-g2
 
 declare -A servers
 declare -A keys
 servers=(
-  ["cao"]="joshua@crawl.akrasiac.org"  # AZ
-  ["cbro"]="crawler@cbro.berotato.org" # OH
-  ["cko"]="terminal@crawl.kelbi.org"   # NY
-  ["cdo"]="crawl@crawl.develz.org"     # GERMANY
-  ["cue"]="terminal@underhound.eu:23"  # AMSTERDAM
-  ["cxc"]="crawl@crawl.xtahua.com"     # FRANCE
+  ["cao"]="joshua@crawl.akrasiac.org"  # AZ,   .11+
+  ["cko"]="terminal@crawl.kelbi.org"   # NY,   .21+
+  ["cbro"]="crawler@cbro.berotato.org" # OH,   .24+
+  ["cdo"]="crawl@crawl.develz.org"     # GER,  4.1.2a (Linley)
+  ["cxc"]="crawl@crawl.xtahua.com"     # FRAN  Latest
 )
 keys=(
   ["cao_key"]="http://crawl.develz.org/cao_key"
@@ -26,6 +28,9 @@ keys=(
   ["cxc_key"]="http://crawl.develz.org/cao_key"
 )
 
+#     ▜     ▘
+# ▛▘▛▌▐ ▛▌▛▘▌▀▌█▌
+# ▙▖▙▌▐▖▙▌▌ ▌▙▖▙▖
 display_colored_text() {
   local color=$1
   local text=$2
@@ -37,30 +42,27 @@ display_colored_text() {
   echo "$text"
   tput sgr0
 }
-display_error_msg() {
-  display_colored_text "red" "Error: $1" >&2
-}
+#             ▗
+# ▛▘▛▌▛▌▛▌█▌▛▘▜▘
+# ▙▖▙▌▌▌▌▌▙▖▙▖▐▖
 validate_and_ssh() {
   local key="$HOME/.ssh/${1}_key"
   local address=$2
   local port=22
-
-  if [[ $2 == *":"* ]]; then
-    address=${2%%:*}
-    port=${2#*:}
-  fi
 
   if [ -f "$key" ]; then
     TERM=xterm ssh -i "$key" "$address" -p "$port"
   else
     display_error_msg "SSH key $key not found"
     display_error_msg "Try running crawl --setup if you haven't"
-    exit 1
+    echo "SSH key $key not found, trying with password."
+    TERM=xterm ssh "$address" -p "$port"
   fi
 }
-fooTV() {
-  telnet termcast.shalott.org
-}
+#           ▌
+# ▛▘▌▌▛▌▛▘  ▙▘█▌▌▌▛▘
+# ▄▌▙▌▌▌▙▖  ▛▖▙▖▙▌▄▌
+#   ▄▌          ▄▌
 download_keys() {
   [ ! -d "$HOME/.ssh" ] && mkdir "$HOME/.ssh"
   [ "$(stat -c %a "$HOME/.ssh")" -lt 400 ] && chmod 400 "$HOME/.ssh"
@@ -81,49 +83,72 @@ download_keys() {
 
   echo "Keys setup complete"
 }
-display_help() {
+# ▌   ▜
+# ▛▌█▌▐ ▛▌
+# ▌▌▙▖▐▖▙▌
+#       ▌
+help() {
   echo "Usage: $0 [option]"
   echo
-  echo "Options:"
+  echo "crawl options:"
   for server in "${!servers[@]}"; do
     echo -e "  $server\t\tconnect to $server"
   done
   echo -e "  tv\t\thttps://termcast.shalott.org/tv"
+  echo
+  echo "nethack options:"
+  echo -e "  nao\t\tofficial"
+  echo -e "  hdf\t\thas a ton of variants"
+  echo
+  echo "misc:"
   echo -e "  -s, --setup\tdownload and configure ssh keys"
   echo -e "  -h, --help\tshow this help message"
 }
 
+#      ▘
+# ▛▛▌▀▌▌▛▌
+# ▌▌▌█▌▌▌▌
 while true; do
+  # a mixture of array keys and manual echos
   [ $# -eq 0 ] && {
     server_keys=("${!servers[@]}")
     server_keys_joined=$(printf ", %s" "${server_keys[@]}")
     server_keys_joined=${server_keys_joined:2}
-    display_colored_text "green" "choices: ${server_keys_joined}, tv"
-    read -r -p "type a server: " server
+    printf "crawl: "; display_colored_text "green" "${server_keys_joined}, tv"
+    printf "bcrawl: "; display_colored_text "green" "cue"
+    echo
+    printf "nethack: "; display_colored_text "green" "nao, hdf"
+    printf "gnollhack: "; display_colored_text "green" "ghc"
+    echo
+    read -r -p "choose: " server
   } || server=$1
   shift
 
+  #      ▘▗   ▌
+  # ▛▘▌▌▌▌▜▘▛▘▛▌
+  # ▄▌▚▚▘▌▐▖▙▖▌▌
   case $server in
-  "quit")
-    exit 0
-    ;;
-  "setup" | "-s" | "--setup")
-    download_keys
-    exit 0
-    ;;
-  "help" | "-h" | "--help")
-    display_help
-    exit 0
-    ;;
-  "tv")
-    fooTV
+  "quit") ;;
+  "setup" | "-s" | "--setup") download_keys;;
+  "help" | "-h" | "--help") help;;
+  "tv") telnet termcast.shalott.org;;
+  "nao") ssh nethack@alt.org;;
+  "cue") ssh -i ~/.ssh/cue_key terminal@underhound.eu -p 23;;
+  "hdf")
+    # Hardfought variants:
+    # AceHack     FIQHack       NetHack    SlashTHEM dNetHack
+    # GnollHack   NetHack Fourk SpliceHack DynaHack  GruntHack
+    # notdNetHack SporkHack     EvilHack   Hack'EM   Slash'EM
+    # UnNetHack   xNetHack      ZAPM
+    ssh nethack@hardfought.org
     ;;
   *)
     if [[ -n "${servers[$server]}" ]]; then
       validate_and_ssh "$server" "${servers[$server]}"
     else
-      display_error_msg "invalid server."
+      display_colored_text "red" "Error: $1"
     fi
     ;;
   esac
+  exit 0
 done
