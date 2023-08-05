@@ -28,9 +28,7 @@ keys=(
   ["cxc_key"]="http://crawl.develz.org/cao_key"
 )
 
-#     ▜     ▘
-# ▛▘▛▌▐ ▛▌▛▘▌▀▌█▌
-# ▙▖▙▌▐▖▙▌▌ ▌▙▖▙▖
+# 𝐂𝐎𝐋𝐎𝐑𝐈𝐙𝐄
 display_colored_text() {
   local color=$1
   local text=$2
@@ -42,9 +40,8 @@ display_colored_text() {
   echo "$text"
   tput sgr0
 }
-#             ▗
-# ▛▘▛▌▛▌▛▌█▌▛▘▜▘
-# ▙▖▙▌▌▌▌▌▙▖▙▖▐▖
+
+# 𝐂𝐎𝐍𝐍𝐄𝐂𝐓
 validate_and_ssh() {
   local key="$HOME/.ssh/${1}_key"
   local address=$2
@@ -59,10 +56,8 @@ validate_and_ssh() {
     TERM=xterm ssh "$address" -p "$port"
   fi
 }
-#           ▌
-# ▛▘▌▌▛▌▛▘  ▙▘█▌▌▌▛▘
-# ▄▌▙▌▌▌▙▖  ▛▖▙▖▙▌▄▌
-#   ▄▌          ▄▌
+
+# 𝐒𝐘𝐍𝐂 𝐊𝐄𝐘𝐒
 download_keys() {
   [ ! -d "$HOME/.ssh" ] && mkdir "$HOME/.ssh"
   [ "$(stat -c %a "$HOME/.ssh")" -lt 400 ] && chmod 400 "$HOME/.ssh"
@@ -83,10 +78,8 @@ download_keys() {
 
   echo "Keys setup complete"
 }
-# ▌   ▜
-# ▛▌█▌▐ ▛▌
-# ▌▌▙▖▐▖▙▌
-#       ▌
+
+# 𝐇𝐄𝐋𝐏
 help() {
   echo "Usage: $0 [option]"
   echo
@@ -105,9 +98,7 @@ help() {
   echo -e "  -h, --help\tshow this help message"
 }
 
-#      ▘
-# ▛▛▌▀▌▌▛▌
-# ▌▌▌█▌▌▌▌
+# 𝐌𝐀𝐈𝐍
 while true; do
   # a mixture of array keys and manual echos
   [ $# -eq 0 ] && {
@@ -124,9 +115,7 @@ while true; do
   } || server=$1
   shift
 
-  #      ▘▗   ▌
-  # ▛▘▌▌▌▌▜▘▛▘▛▌
-  # ▄▌▚▚▘▌▐▖▙▖▌▌
+  # 𝐒𝐖𝐈𝐓𝐂𝐇
   case $server in
   "quit") ;;
   "setup" | "-s" | "--setup") download_keys;;
